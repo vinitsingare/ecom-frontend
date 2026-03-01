@@ -155,7 +155,7 @@ const dispatch = useDispatch();
             <textarea
                 rows={5}
                 placeholder="Add product description...."
-                className={`px-4 py-2 w-full border outline-hidden bg-transparent text-slate-800 rounded-md ${
+                className={`px-4 py-2 w-full border outline-none bg-transparent text-slate-800 rounded-md ${
                     errors["description"]?.message ? "border-red-500" : "border-slate-700" 
                 }`}
                 maxLength={255}

@@ -51,6 +51,7 @@ const LogIn = () => {
                     placeholder="Enter your username"
                     register={register}
                     errors={errors}
+                    darkMode={true}
                     />
 
                 <InputField
@@ -62,6 +63,7 @@ const LogIn = () => {
                     placeholder="Enter your password"
                     register={register}
                     errors={errors}
+                    darkMode={true}
                     />
             </div>
 

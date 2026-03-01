@@ -23,7 +23,7 @@ const SelectTextField = ({
                 </ListboxButton>
                 <ListboxOptions
                     transition
-                    className="absolute z-10 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-opacity-5 ring-black focus:outline-hidden">
+                    className="absolute z-10 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-opacity-5 ring-black focus:outline-none">
                     {lists?.map((category) => (
                     <ListboxOption key={category.categoryId} value={category} 
                     className="group relative cursor-default py-2 pl-3 pr-9 text-gray-900 data-focus:bg-indigo-600 data-focus:text-white">

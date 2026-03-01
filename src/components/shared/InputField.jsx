@@ -10,6 +10,7 @@ const InputField = ({
     min,
     value,
     placeholder,
+    darkMode = false,
 }) => {
     return (
         <div className="flex flex-col gap-2 w-full">
@@ -17,7 +18,7 @@ const InputField = ({
                 htmlFor="id"
                 className={`${
                     className ? className : ""
-                } font-semibold text-sm text-gray-300`}>
+                } font-semibold text-sm ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
                 {label}
             </label>
             <input
@@ -26,8 +27,12 @@ const InputField = ({
                 placeholder={placeholder}
                 className={`${
                     className ? className : ""
-                } px-4 py-3 border outline-none bg-dark-card text-white rounded-lg transition-all duration-300 ${
-                    errors[id]?.message ? "border-red-500" : "border-dark-light focus:border-purple-500" 
+                } px-4 py-3 border outline-none bg-transparent rounded-lg transition-all duration-300 ${
+                    darkMode 
+                        ? "text-white border-dark-light focus:border-purple-500" 
+                        : "text-gray-800 border-gray-300 focus:border-purple-500"
+                } ${
+                    errors[id]?.message ? "border-red-500" : "" 
                 }`}
                 {...register(id, {
                     required: {value: required, message},

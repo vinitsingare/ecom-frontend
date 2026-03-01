@@ -72,7 +72,7 @@ const Filter = ({ categories }) => {
                     placeholder="Search Products..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="border border-dark-light bg-dark-800 text-gray-200 rounded-full py-2.5 pl-12 pr-4 w-full focus:outline-hidden focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 placeholder-gray-500"/>
+                    className="border border-dark-light bg-dark-800 text-gray-200 rounded-full py-2.5 pl-12 pr-4 w-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 placeholder-gray-500"/>
                 <FiSearch className="absolute left-4 text-purple-400 size={20}"/>
             </div>
 
