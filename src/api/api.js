@@ -5,4 +5,39 @@ const api = axios.create({
     withCredentials: true,
 });
 
+// Add interceptor to include JWT token in requests
+api.interceptors.request.use(
+    (config) => {
+        const authData = localStorage.getItem("auth");
+        
+        if (authData) {
+            try {
+                const user = JSON.parse(authData);
+                // The JWT token is directly in jwtToken field from UserInfoResponse
+                let token = user?.jwtToken;
+                
+                if (token) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                    console.log("Adding Bearer token to request:", config.url);
+                }
+            } catch (e) {
+                console.error("Error parsing auth data:", e);
+            }
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+// Add response interceptor for error handling
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        console.log("API Error:", error.response?.data || error.message);
+        return Promise.reject(error);
+    }
+);
+
 export default api;

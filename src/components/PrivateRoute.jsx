@@ -22,12 +22,14 @@ const PrivateRoute = ({ publicPage = false, adminOnly = false }) => {
                 return <Navigate to="/" replace />
             }
         }
+        
+        // If adminOnly route but user is not admin and not seller, redirect
+        if (!isAdmin && !isSeller) {
+            return <Navigate to="/" replace />
+        }
     }
 
-    if (!isAdmin && !isSeller) {
-        return <Navigate to="/"/>
-    }
-    
+    // For regular private routes, just check if user is logged in
     return user ? <Outlet /> : <Navigate to="/login" />;
 }
 

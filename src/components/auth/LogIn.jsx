@@ -28,18 +28,20 @@ const LogIn = () => {
     };
 
     return (
-        <div className="min-h-[calc(100vh-64px)] flex justify-center items-center">
+        <div className="min-h-[calc(100vh-64px)] flex justify-center items-center py-12">
             <form
                 onSubmit={handleSubmit(loginHandler)}
-                className="sm:w-[450px] w-[360px] shadow-custom py-8 sm:px-8 px-4 rounded-md">
+                className="sm:w-[450px] w-[360px] dark-card py-10 sm:px-10 px-6 rounded-2xl gradient-border">
                     <div className="flex flex-col items-center justify-center space-y-4">
-                        <AiOutlineLogin className="text-slate-800 text-5xl"/>
-                        <h1 className="text-slate-800 text-center font-montserrat lg:text-3xl text-2xl font-bold">
-                            Login Here
+                        <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                            <AiOutlineLogin className="text-white text-3xl"/>
+                        </div>
+                        <h1 className="text-center font-montserrat lg:text-3xl text-2xl font-bold">
+                            <span className="gradient-text">Welcome Back</span>
                         </h1>
+                        <p className="text-gray-500 text-sm">Sign in to continue shopping</p>
                     </div>
-            <hr className="mt-2 mb-5 text-black" />
-            <div className="flex flex-col gap-3">
+            <div className="mt-8 mb-4 flex flex-col gap-4">
                 <InputField
                     label="UserName"
                     required
@@ -65,23 +67,23 @@ const LogIn = () => {
 
             <button
                 disabled={loader}
-                className="bg-button-gradient flex gap-2 items-center justify-center font-semibold text-white w-full py-2 hover:text-slate-400 transition-colors duration-100 rounded-xs my-3"
+                className="btn-gradient flex gap-2 items-center justify-center font-semibold text-white w-full py-3 rounded-full my-4 transition-all duration-300 hover:shadow-purple-500/40"
                 type="submit">
                 {loader ? (
                     <>
                     <Spinners /> Loading...
                     </>
                 ) : (
-                    <>Login</>
+                    <>Sign In</>
                 )}
             </button>
 
-            <p className="text-center text-sm text-slate-700 mt-6">
+            <p className="text-center text-sm text-gray-500 mt-6">
               Don't have an account?
               <Link
-                className="font-semibold underline hover:text-black"
+                className="font-semibold gradient-text ml-1"
                 to="/register">
-              <span> SignUp</span></Link>  
+              <span> Sign Up</span></Link>  
             </p>
             </form>
         </div>

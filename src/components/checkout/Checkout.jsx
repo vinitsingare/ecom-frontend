@@ -51,8 +51,15 @@ const Checkout = () => {
     }, [dispatch]);
 
   return (
-    <div className='py-14 min-h-[calc(100vh-100px)]'>
-        <Stepper activeStep={activeStep} alternativeLabel>
+    <div className='py-14 min-h-[calc(100vh-100px)] px-4'>
+        <div className="mb-10 text-center">
+            <h1 className="text-3xl font-bold">
+                <span className="gradient-text">Checkout</span>
+            </h1>
+            <p className="text-gray-500 mt-2">Complete your order in a few simple steps</p>
+        </div>
+        
+        <Stepper activeStep={activeStep} alternativeLabel className="mb-8">
             {steps.map((label, index) => (
                 <Step key={index}>
                     <StepLabel>{label}</StepLabel>
@@ -65,7 +72,7 @@ const Checkout = () => {
                 <Skeleton />
             </div>
         ) : (
-            <div className='mt-5'>
+            <div className='mt-8'>
                 {activeStep === 0 && <AddressInfo address={address} />}
                 {activeStep === 1 && <PaymentMethod />}
                 {activeStep === 2 && <OrderSummary 
@@ -86,12 +93,20 @@ const Checkout = () => {
         
 
         <div
-            className='flex justify-between items-center px-4 fixed z-50 h-24 bottom-0 bg-white left-0 w-full py-4 border-slate-200'
-            style={{ boxShadow: "0 -2px 4px rgba(100, 100, 100, 0.15)" }}>
+            className='flex justify-between items-center px-4 fixed z-50 h-24 bottom-0 left-0 w-full py-4 dark-card border-t border-dark-light'
+            style={{ boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.3)" }}>
             <Button
                 variant='outlined'
                 disabled={activeStep === 0}
-                onClick={handleBack}>
+                onClick={handleBack}
+                sx={{
+                    color: '#a1a1aa',
+                    borderColor: '#3f3f46',
+                    '&:hover': {
+                        borderColor: '#7e22ce',
+                        backgroundColor: 'rgba(126, 34, 206, 0.1)',
+                    }
+                }}>
                     Back
             </Button>
 
@@ -105,13 +120,13 @@ const Checkout = () => {
                             )
                         )
                     }
-                    className={`bg-custom-blue font-semibold px-6 h-10 rounded-md text-white
+                    className={`btn-gradient font-semibold px-8 h-12 rounded-full text-white
                        ${
                         errorMessage ||
                         (activeStep === 0 && !selectedUserCheckoutAddress) ||
                         (activeStep === 1 && !paymentMethod)
-                        ? "opacity-60"
-                        : ""
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:shadow-purple-500/40"
                        }`}
                        onClick={handleNext}>
                     Proceed

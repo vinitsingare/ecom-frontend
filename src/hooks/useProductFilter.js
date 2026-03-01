@@ -56,10 +56,28 @@ export const useDashboardProductFilter = () => {
 
         params.set("pageNumber", currentPage - 1);
 
+        const sortOrder = searchParams.get("sortby") || "asc";
+        const categoryParams = searchParams.get("category") || null;
+        const keyword = searchParams.get("keyword") || null;
+        
+        params.set("sortBy","price");
+        params.set("sortOrder", sortOrder);
+
+        // FIXED: Include category parameter when filtering
+        if (categoryParams) {
+            params.set("category", categoryParams);
+        }
+
+        if (keyword) {
+            params.set("keyword", keyword);
+        }
+
         const queryString = params.toString();
+        console.log("DASHBOARD QUERY STRING", queryString);
+        
         dispatch(dashboardProductsAction(queryString, isAdmin));
 
-    }, [dispatch, searchParams]);
+    }, [dispatch, searchParams, isAdmin]);
 };
 
 export default useProductFilter;

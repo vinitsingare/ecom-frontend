@@ -1,6 +1,6 @@
 import { Badge } from "@mui/material";
 import { useState } from "react";
-import { FaShoppingCart, FaSignInAlt, FaStore } from "react-icons/fa";
+import { FaShoppingCart, FaSignInAlt, FaStore, FaHeart } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
@@ -13,100 +13,157 @@ const Navbar = () => {
     const { cart } = useSelector((state) => state.carts);
     const { user } = useSelector((state) => state.auth);
     
+    const navLinks = [
+        { name: "Home", path: "/" },
+        { name: "Products", path: "/products" },
+        { name: "About", path: "/about" },
+        { name: "Contact", path: "/contact" },
+    ];
+
     return (
-        <div className="h-[70px] bg-custom-gradient text-white z-50 flex items-center sticky top-0">
-            <div className="lg:px-14 sm:px-8 px-4 w-full flex justify-between">
-                <Link to="/" className="flex items-center text-2xl font-bold">
-                    <FaStore className="mr-2 text-3xl" />
-                    <span className="font-[Poppins]">E-Shop</span>
-                </Link>
+        <nav className="glass-effect z-50 sticky top-0 backdrop-blur-lg">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-20">
+                    {/* Logo Section */}
+                    <Link to="/" className="flex items-center gap-2 group">
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 transition-all duration-300">
+                            <FaStore className="text-white text-lg" />
+                        </div>
+                        <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                            E-Shop
+                        </span>
+                    </Link>
 
-            <ul className={`flex sm:gap-10 gap-4 sm:items-center  text-slate-800 sm:static absolute left-0 top-[70px] sm:shadow-none shadow-md ${
-            navbarOpen ? "h-fit sm:pb-0 pb-5" : "h-0 overflow-hidden"
-          }  transition-all duration-100 sm:h-fit sm:bg-none bg-custom-gradient   text-white sm:w-fit w-full sm:flex-row flex-col px-4 sm:px-0`}>
-                <li className="font-medium transition-all duration-150">
-                   <Link className={`${
-                    path === "/" ? "text-white font-semibold" : "text-gray-200"
-                   }`}
-                    to="/">
-                        Home
-                   </Link> 
-                </li>
+                    {/* Desktop Navigation */}
+                    <div className="hidden md:flex items-center gap-1">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                                    path === link.path
+                                        ? "bg-purple-500/20 text-purple-400"
+                                        : "text-gray-300 hover:text-white hover:bg-white/5"
+                                }`}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
 
-                <li className="font-medium transition-all duration-150">
-                   <Link className={`${
-                    path === "/products" ? "text-white font-semibold" : "text-gray-200"
-                   }`}
-                    to="/products">
-                        Products
-                   </Link> 
-                </li>
+                    {/* Right Side - Cart & Auth */}
+                    <div className="hidden md:flex items-center gap-4">
+                        {/* Cart */}
+                        <Link
+                            to="/cart"
+                            className={`p-2.5 rounded-xl transition-all duration-300 ${
+                                path === "/cart"
+                                    ? "bg-purple-500/20 text-purple-400"
+                                    : "text-gray-300 hover:text-white hover:bg-white/5"
+                            }`}
+                        >
+                            <Badge
+                                showZero
+                                badgeContent={cart?.length || 0}
+                                sx={{
+                                    '& .MuiBadge-badge': {
+                                        background: 'linear-gradient(135deg, #7e22ce 0%, #ec4899 100%)',
+                                        color: '#fff',
+                                        fontWeight: 'bold',
+                                        minWidth: '20px',
+                                        height: '20px',
+                                        borderRadius: '10px',
+                                    }
+                                }}
+                                overlap="circular"
+                            >
+                                <FaShoppingCart size={20} />
+                            </Badge>
+                        </Link>
 
+                        {/* Login / User Menu */}
+                        {user && user.id ? (
+                            <UserMenu />
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 transition-all duration-300"
+                            >
+                                <FaSignInAlt />
+                                <span>Login</span>
+                            </Link>
+                        )}
+                    </div>
 
-                <li className="font-medium transition-all duration-150">
-                   <Link className={`${
-                    path === "/about" ? "text-white font-semibold" : "text-gray-200"
-                   }`}
-                    to="/about">
-                        About
-                   </Link> 
-                </li>
+                    {/* Mobile Menu Button */}
+                    <button
+                        onClick={() => setNavbarOpen(!navbarOpen)}
+                        className="md:hidden p-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                    >
+                        {navbarOpen ? (
+                            <RxCross2 className="text-2xl" />
+                        ) : (
+                            <IoIosMenu className="text-2xl" />
+                        )}
+                    </button>
+                </div>
 
-                <li className="font-medium transition-all duration-150">
-                   <Link className={`${
-                    path === "/contact" ? "text-white font-semibold" : "text-gray-200"
-                   }`}
-                    to="/contact">
-                        Contact
-                   </Link> 
-                </li>
+                {/* Mobile Menu */}
+                <div className={`md:hidden overflow-hidden transition-all duration-300 ${
+                    navbarOpen ? "max-h-96 pb-6" : "max-h-0"
+                }`}>
+                    <div className="flex flex-col gap-2 pt-2">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                onClick={() => setNavbarOpen(false)}
+                                className={`px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
+                                    path === link.path
+                                        ? "bg-purple-500/20 text-purple-400"
+                                        : "text-gray-300 hover:text-white hover:bg-white/5"
+                                }`}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                        
+                        <div className="flex items-center gap-4 mt-4 pt-4 border-t border-white/10">
+                            <Link
+                                to="/cart"
+                                onClick={() => setNavbarOpen(false)}
+                                className="flex items-center gap-2 text-gray-300"
+                            >
+                                <Badge
+                                    showZero
+                                    badgeContent={cart?.length || 0}
+                                    sx={{
+                                        '& .MuiBadge-badge': {
+                                            background: 'linear-gradient(135deg, #7e22ce 0%, #ec4899 100%)',
+                                            color: '#fff',
+                                        }
+                                    }}
+                                >
+                                    <FaShoppingCart size={20} />
+                                </Badge>
+                                <span>Cart</span>
+                            </Link>
 
-                <li className="font-medium transition-all duration-150">
-                   <Link className={`${
-                    path === "/cart" ? "text-white font-semibold" : "text-gray-200"
-                   }`}
-                    to="/cart">
-                        <Badge
-                            showZero
-                            badgeContent={cart?.length || 0}
-                            color="primary"
-                            overlap="circular"
-                            anchorOrigin={{ vertical: 'top', horizontal: 'right', }}>
-                                <FaShoppingCart size={25} />
-                        </Badge>
-                   </Link> 
-                </li>
-
-                {(user && user.id) ? (
-                    <li className="font-medium transition-all duration-150">
-                        <UserMenu />
-                    </li>
-                ) : (
-                <li className="font-medium transition-all duration-150">
-                   <Link className="flex items-center space-x-2 px-4 py-[6px] 
-                            bg-linear-to-r from-purple-600 to-red-500 
-                            text-white font-semibold rounded-md shadow-lg 
-                            hover:from-purple-500 hover:to-red-400 transition 
-                            duration-300 ease-in-out transform "
-                    to="/login">
-                        <FaSignInAlt />
-                        <span>Login</span>
-                   </Link> 
-                </li>
-                )}
-            </ul>
-
-            <button
-                onClick={() => setNavbarOpen(!navbarOpen)}
-                className="sm:hidden flex items-center sm:mt-0 mt-2">
-                    {navbarOpen ? (
-                        <RxCross2 className="text-white text-3xl" />
-                    ) : (
-                        <IoIosMenu className="text-white text-3xl" />
-                    )}
-            </button>
+                            {!user && (
+                                <Link
+                                    to="/login"
+                                    onClick={() => setNavbarOpen(false)}
+                                    className="flex-1 flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full"
+                                >
+                                    <FaSignInAlt />
+                                    <span>Login</span>
+                                </Link>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </nav>
     )
 }
 
