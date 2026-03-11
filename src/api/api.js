@@ -9,19 +9,15 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const authData = localStorage.getItem("auth");
-    console.log("🔐 Interceptor - authData exists:", !!authData);
 
     if (authData) {
       try {
         const user = JSON.parse(authData);
         let token = user?.jwtToken;
-        console.log("🔐 Interceptor - jwtToken exists:", !!token);
-        console.log("🔐 Interceptor - token preview:", token ? token.substring(0, 20) + "..." : "NULL");
 
         if (token) {
-          token = token.replace("Bearer ", "").trim();  // 🔥 FIX
+          token = token.replace("Bearer ", "").trim();
           config.headers.Authorization = `Bearer ${token}`;
-          console.log("🔐 Interceptor - Authorization header SET for:", config.url);
         }
       } catch (e) {
         console.error("Error parsing auth data:", e);
