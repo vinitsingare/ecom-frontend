@@ -468,8 +468,8 @@ export const updateProductImageFromDashboard =
     try {
         setLoader(true);
         // Use the correct backend endpoint for image upload
-        // Backend uses /api/public/product/{productId}/image
-        await api.put(`/public/product/${productId}/image`, formData, {
+        const endpoint = isAdmin ? "/admin/product/" : "/seller/product/";
+        await api.put(`${endpoint}${productId}/image`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             },
