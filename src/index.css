@@ -1,46 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap')
-layer(base);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
+
+@layer base;
 
 @import 'tailwindcss';
 
 @theme {
-  --font-montserrat: Montserrat, sans-serif;
-
-  --shadow-custom: 0 0 15px rgba(0, 0, 0, 0.3);
-  --shadow-right: 10px 0px 10px -5px rgba(0, 0, 0, 0.3);
-
-  --color-custom-blue: rgba(28, 100, 242, 1);
-
-  --color-banner-color1: #fdc200;
-  --color-banner-color2: #ff2c2c;
-  --color-banner-color3: #21ad61;
-  --color-banner-color4: #723da6;
-
-  --background-image-custom-gradient: linear-gradient(
-    to right,
-    #111827,
-    #1f2937
-  );
-  --background-image-button-gradient: linear-gradient(
-    to right,
-    #7e22ce,
-    #ef4444
-  );
-  --background-image-custom-gradient2: linear-gradient(
-    135deg,
-    #f5f5f5,
-    #eae7dc
-  );
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -50,186 +19,159 @@ layer(base);
     border-color: var(--color-gray-200, currentcolor);
   }
   
-  /* Dark Theme Base Styles */
+  /* Light Minimalist Theme Base Styles */
   body {
-    background-color: #0a0a0a;
-    color: #e4e4e7;
-    font-family: var(--font-montserrat);
+    background-color: #ffffff;
+    color: #000000;
+    font-family: var(--font-sans);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
   
   ::-webkit-scrollbar-track {
-    background: #1a1a1a;
+    background: #f1f1f1;
   }
   
   ::-webkit-scrollbar-thumb {
-    background: #3f3f46;
-    border-radius: 4px;
+    background: #d1d5db;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: #52525b;
+    background: #9ca3af;
   }
 }
 
-/* Custom Dark Theme Utilities */
 @layer utilities {
-  .dark-card {
-    background: linear-gradient(145deg, #1f1f1f 0%, #171717 100%);
-    border: 1px solid #27272a;
-    border-radius: 16px;
+  .luxury-heading {
+    font-family: var(--font-sans);
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+  
+  .luxury-button {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
     transition: all 0.3s ease;
   }
   
-  .dark-card:hover {
-    border-color: #7e22ce;
-    box-shadow: 0 8px 30px rgba(126, 34, 206, 0.15);
-    transform: translateY(-2px);
+  .luxury-button:hover {
+    background-color: #ffffff;
+    color: #000000;
   }
-  
-  .glass-effect {
-    background: rgba(24, 24, 27, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(63, 63, 70, 0.4);
-  }
-  
-  .gradient-text {
-    background: linear-gradient(135deg, #c084fc 0%, #f472b6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .gradient-border {
-    position: relative;
-    background: linear-gradient(#0a0a0a, #0a0a0a) padding-box,
-                linear-gradient(135deg, #7e22ce, #ef4444) border-box;
-    border: 2px solid transparent;
-    border-radius: 12px;
-  }
-  
-  .btn-gradient {
-    background: linear-gradient(135deg, #7e22ce 0%, #a855f7 50%, #ef4444 100%);
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
-    border: none;
+
+  .luxury-button-outline {
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #000000;
     transition: all 0.3s ease;
   }
   
-  .btn-gradient:hover {
-    background-position: right center;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(126, 34, 206, 0.4);
-  }
-  
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
-  .text-gray-100 { color: #f4f4f5; }
-  .text-gray-200 { color: #e4e4e7; }
-  .text-gray-300 { color: #d4d4d8; }
-  .text-gray-400 { color: #a1a1aa; }
-  .text-gray-500 { color: #71717a; }
-  .text-gray-600 { color: #52525b; }
-  .text-gray-700 { color: #3f3f46; }
-  .text-gray-800 { color: #27272a; }
-  
-  .bg-dark-900 { background-color: #0a0a0a; }
-  .bg-dark-800 { background-color: #18181b; }
-  .bg-dark-700 { background-color: #1f1f23; }
-  .bg-dark-600 { background-color: #27272a; }
-  .bg-dark-500 { background-color: #3f3f46; }
-  
-  .border-dark { border-color: #27272a; }
-  .border-dark-light { border-color: #3f3f46; }
-  
-  .hover-glow:hover {
-    box-shadow: 0 0 20px rgba(126, 34, 206, 0.3);
+  .luxury-button-outline:hover {
+    background-color: #000000;
+    color: #ffffff;
   }
 }
 
-/* MUI Overrides for Dark Theme */
+/* MUI Overrides for Light Minimalist Theme */
 .MuiInputBase-root {
-  background-color: #18181b !important;
-  color: #e4e4e7 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
 }
 
 .MuiOutlinedInput-notchedOutline {
-  border-color: #3f3f46 !important;
+  border-color: #e5e7eb !important;
+  border-radius: 0 !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #000000 !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #000000 !important;
+  border-width: 1px !important;
 }
 
 .MuiInputLabel-root {
-  color: #a1a1aa !important;
+  color: #6b7280 !important;
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: #000000 !important;
 }
 
 .MuiSelect-select {
-  background-color: #18181b !important;
-  color: #e4e4e7 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
 }
 
 .MuiMenu-paper {
-  background-color: #1f1f23 !important;
-  color: #e4e4e7 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
 }
 
 .MuiMenuItem-root {
-  color: #e4e4e7 !important;
+  color: #000000 !important;
 }
 
 .MuiMenuItem-root:hover {
-  background-color: #27272a !important;
+  background-color: #f3f4f6 !important;
 }
 
 .MuiStepLabel-label {
-  color: #a1a1aa !important;
+  color: #6b7280 !important;
 }
 
 .MuiStepLabel-label.Mui-active {
-  color: #e4e4e7 !important;
+  color: #000000 !important;
 }
 
 .MuiStepLabel-label.Mui-completed {
-  color: #a1a1aa !important;
+  color: #6b7280 !important;
 }
 
 .MuiStepIcon-root {
-  color: #3f3f46 !important;
+  color: #e5e7eb !important;
 }
 
 .MuiStepIcon-root.Mui-active {
-  color: #7e22ce !important;
+  color: #000000 !important;
 }
 
 .MuiStepIcon-root.Mui-completed {
-  color: #22c55e !important;
+  color: #000000 !important;
 }
 
 .MuiDialog-paper {
-  background-color: #1f1f23 !important;
-  color: #e4e4e7 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
 }
 
 .MuiTableCell-root {
-  border-bottom-color: #3f3f46 !important;
-  color: #e4e4e7 !important;
+  border-bottom-color: #e5e7eb !important;
+  color: #000000 !important;
 }
 
 .MuiTableHead .MuiTableCell-root {
-  background-color: #18181b !important;
-  color: #a1a1aa !important;
+  background-color: #f9fafb !important;
+  color: #4b5563 !important;
+  font-weight: 600 !important;
 }
 
 .MuiChip-root {
-  background-color: #27272a !important;
-  color: #e4e4e7 !important;
+  background-color: #f3f4f6 !important;
+  color: #000000 !important;
+  border-radius: 0 !important;
 }

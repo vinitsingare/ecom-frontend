@@ -16,21 +16,16 @@ const Home = () => {
         dispatch(fetchProducts());
     }, [dispatch]);
     return (
-        <div className="lg:px-14 sm:px-8 px-4 min-h-screen">
-            <div className="py-6">
+        <div className="w-full min-h-screen">
+            <div>
                 <HeroBanner />
             </div>
             
-            <div className="py-10">
-                <div className="flex flex-col justify-center items-center space-y-3 mb-10">
-                    <h1 className="text-4xl font-bold">
-                        <span className="gradient-text">Featured Products</span>
-                    </h1>
-                        <span className="text-gray-400 text-lg">
-                            Discover our handpicked selection of top-rated items just for you!
-                        </span>
-                        <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mt-2"></div>
-                    
+            <div className="py-16 md:py-24 px-4 sm:px-6 md:px-8">
+                <div className="flex flex-col justify-center items-center mb-12">
+                    <h2 className="text-2xl md:text-3xl font-sans font-medium text-black text-center luxury-heading">
+                        Explore a Selection of the Maison's Creations
+                    </h2>
                 </div>
 
                 {isLoading ? (
@@ -38,18 +33,17 @@ const Home = () => {
                 ) : errorMessage ? (
                     <div className="flex justify-center items-center h-[200px]">
                         <FaExclamationTriangle className="text-red-500 text-3xl mr-2"/>
-                        <span className="text-gray-300 text-lg font-medium">
+                        <span className="text-gray-500 text-lg font-medium">
                             {errorMessage}
                         </span>
                     </div>
                 ) : (
-            <div className="pb-6 pt-6 grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-y-8 gap-x-6">
-                       {products && 
-                       products?.slice(0,4)
-                                .map((item, i) => <ProductCard key={i} {...item} />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full max-w-[1600px] mx-auto">
+                        {products && 
+                            products?.slice(0,4).map((item, i) => <ProductCard key={i} {...item} />
                         )}
                     </div>
-                    )}
+                )}
             </div>
         </div>
     )

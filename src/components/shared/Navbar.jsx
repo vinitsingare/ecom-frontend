@@ -1,6 +1,6 @@
 import { Badge } from "@mui/material";
 import { useState } from "react";
-import { FaShoppingCart, FaSignInAlt, FaStore, FaHeart } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaRegHeart, FaSearch } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
@@ -21,63 +21,66 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="glass-effect z-50 sticky top-0 backdrop-blur-lg">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="bg-white z-50 sticky top-0 border-b border-gray-200">
+            <div className="w-full px-4 sm:px-8 md:px-12">
                 <div className="flex items-center justify-between h-20">
-                    {/* Logo Section */}
-                    <Link to="/" className="flex items-center gap-2 group">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 transition-all duration-300">
-                            <FaStore className="text-white text-lg" />
-                        </div>
-                        <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                            E-Shop
-                        </span>
-                    </Link>
-
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-1">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.path}
-                                to={link.path}
-                                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                                    path === link.path
-                                        ? "bg-purple-500/20 text-purple-400"
-                                        : "text-gray-300 hover:text-white hover:bg-white/5"
-                                }`}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
+                    
+                    {/* Left - Menu & Search */}
+                    <div className="flex items-center gap-6 flex-1">
+                        <button
+                            onClick={() => setNavbarOpen(!navbarOpen)}
+                            className="text-black hover:text-gray-600 transition-colors flex items-center gap-2 font-medium text-sm tracking-wide"
+                        >
+                            {navbarOpen ? (
+                                <RxCross2 className="text-xl" />
+                            ) : (
+                                <IoIosMenu className="text-2xl" />
+                            )}
+                            <span className="hidden md:block">Menu</span>
+                        </button>
+                        
+                        <button className="hidden md:flex text-black hover:text-gray-600 transition-colors items-center gap-2 font-medium text-sm tracking-wide">
+                            <FaSearch className="text-lg" />
+                            <span>Search</span>
+                        </button>
                     </div>
 
-                    {/* Right Side - Cart & Auth */}
-                    <div className="hidden md:flex items-center gap-4">
+                    {/* Center - Logo */}
+                    <div className="flex-1 flex justify-center">
+                        <Link to="/" className="flex items-center">
+                            <span className="text-3xl font-serif font-semibold tracking-widest text-black">
+                                PARIDHAN
+                            </span>
+                        </Link>
+                    </div>
+
+                    {/* Right Side - Call Us, Wishlist, Cart & Auth */}
+                    <div className="flex items-center justify-end gap-6 flex-1">
+                        <span className="hidden lg:block text-sm font-medium tracking-wide">Call Us</span>
+                        
+                        <button className="hidden md:block text-black hover:text-gray-600 transition-colors">
+                            <FaRegHeart className="text-xl" />
+                        </button>
+
                         {/* Cart */}
                         <Link
                             to="/cart"
-                            className={`p-2.5 rounded-xl transition-all duration-300 ${
-                                path === "/cart"
-                                    ? "bg-purple-500/20 text-purple-400"
-                                    : "text-gray-300 hover:text-white hover:bg-white/5"
-                            }`}
+                            className="text-black hover:text-gray-600 transition-colors relative"
                         >
                             <Badge
                                 showZero
                                 badgeContent={cart?.length || 0}
                                 sx={{
                                     '& .MuiBadge-badge': {
-                                        background: 'linear-gradient(135deg, #7e22ce 0%, #ec4899 100%)',
+                                        backgroundColor: '#000',
                                         color: '#fff',
-                                        fontWeight: 'bold',
-                                        minWidth: '20px',
-                                        height: '20px',
-                                        borderRadius: '10px',
+                                        fontSize: '0.7rem',
+                                        minWidth: '18px',
+                                        height: '18px',
                                     }
                                 }}
-                                overlap="circular"
                             >
-                                <FaShoppingCart size={20} />
+                                <FaShoppingCart className="text-xl" />
                             </Badge>
                         </Link>
 
@@ -87,79 +90,33 @@ const Navbar = () => {
                         ) : (
                             <Link
                                 to="/login"
-                                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 transition-all duration-300"
+                                className="text-black hover:text-gray-600 transition-colors"
                             >
-                                <FaSignInAlt />
-                                <span>Login</span>
+                                <FaUser className="text-xl" />
                             </Link>
                         )}
                     </div>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => setNavbarOpen(!navbarOpen)}
-                        className="md:hidden p-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                    >
-                        {navbarOpen ? (
-                            <RxCross2 className="text-2xl" />
-                        ) : (
-                            <IoIosMenu className="text-2xl" />
-                        )}
-                    </button>
                 </div>
 
-                {/* Mobile Menu */}
-                <div className={`md:hidden overflow-hidden transition-all duration-300 ${
-                    navbarOpen ? "max-h-96 pb-6" : "max-h-0"
+                {/* Mobile/Desktop Dropdown Menu */}
+                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    navbarOpen ? "max-h-96 border-t border-gray-100" : "max-h-0"
                 }`}>
-                    <div className="flex flex-col gap-2 pt-2">
+                    <div className="flex flex-col gap-4 py-6 px-2">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.path}
                                 to={link.path}
                                 onClick={() => setNavbarOpen(false)}
-                                className={`px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
+                                className={`text-sm font-medium tracking-wide uppercase transition-colors ${
                                     path === link.path
-                                        ? "bg-purple-500/20 text-purple-400"
-                                        : "text-gray-300 hover:text-white hover:bg-white/5"
+                                        ? "text-black underline underline-offset-4"
+                                        : "text-gray-500 hover:text-black"
                                 }`}
                             >
                                 {link.name}
                             </Link>
                         ))}
-                        
-                        <div className="flex items-center gap-4 mt-4 pt-4 border-t border-white/10">
-                            <Link
-                                to="/cart"
-                                onClick={() => setNavbarOpen(false)}
-                                className="flex items-center gap-2 text-gray-300"
-                            >
-                                <Badge
-                                    showZero
-                                    badgeContent={cart?.length || 0}
-                                    sx={{
-                                        '& .MuiBadge-badge': {
-                                            background: 'linear-gradient(135deg, #7e22ce 0%, #ec4899 100%)',
-                                            color: '#fff',
-                                        }
-                                    }}
-                                >
-                                    <FaShoppingCart size={20} />
-                                </Badge>
-                                <span>Cart</span>
-                            </Link>
-
-                            {!user && (
-                                <Link
-                                    to="/login"
-                                    onClick={() => setNavbarOpen(false)}
-                                    className="flex-1 flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-full"
-                                >
-                                    <FaSignInAlt />
-                                    <span>Login</span>
-                                </Link>
-                            )}
-                        </div>
                     </div>
                 </div>
             </div>
