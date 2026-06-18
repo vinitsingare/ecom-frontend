@@ -4,6 +4,7 @@ import Products from './components/products/Products'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './components/home/Home'
 import Navbar from './components/shared/Navbar'
+import Footer from './components/shared/Footer'
 import About from './components/About'
 import Contact from './components/Contact'
 import { Toaster } from 'react-hot-toast'
@@ -56,6 +57,7 @@ function App() {
               </Route>
             </Route>
           </Routes>
+          <Footer />
         </Router>
         <Toaster position='bottom-center'/>
       </div>

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import HeroBanner from "./HeroBanner";
+import CollectionsGrid from "./CollectionsGrid";
 import { useEffect } from "react";
 import { fetchProducts } from "../../store/actions";
 import ProductCard from "../shared/ProductCard";
@@ -16,10 +17,12 @@ const Home = () => {
         dispatch(fetchProducts());
     }, [dispatch]);
     return (
-        <div className="w-full min-h-screen">
+        <div className="w-full min-h-screen bg-white">
             <div>
                 <HeroBanner />
             </div>
+
+            <CollectionsGrid />
             
             <div className="py-16 md:py-24 px-4 sm:px-6 md:px-8">
                 <div className="flex flex-col justify-center items-center mb-12">
