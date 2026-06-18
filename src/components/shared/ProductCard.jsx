@@ -49,17 +49,17 @@ const ProductCard = ({
                     specialPrice,
                 })
             }} 
-                className="w-full overflow-hidden aspect-[4/5] bg-gray-50 relative cursor-pointer"
+                className="w-full overflow-hidden aspect-square bg-[#f9f9f9] relative cursor-pointer flex items-center justify-center p-6 md:p-10"
             >
                 <img 
-                    className="w-full h-full object-cover transition-opacity duration-500 group-hover:opacity-90"
+                    className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105"
                     src={image}
                     alt={productName}
                 />
                 
                 {/* Minimal Overlay on hover */}
                 <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                    <span className="text-black bg-white px-6 py-2 text-xs uppercase tracking-widest font-medium shadow-sm transition-transform duration-300 transform translate-y-4 group-hover:translate-y-0">
+                    <span className="text-black bg-white px-8 py-3 text-xs uppercase tracking-widest font-medium shadow-sm transition-transform duration-300 transform translate-y-4 group-hover:translate-y-0">
                         Quick View
                     </span>
                 </div>
@@ -73,7 +73,7 @@ const ProductCard = ({
             </div>
 
             {/* Content Area */}
-            <div className="pt-6 pb-4 flex flex-col items-center text-center">
+            <div className="pt-4 pb-4 flex flex-col items-start text-left">
                 <h2 onClick={() => {
                 handleProductView({
                     id: productId,
@@ -86,43 +86,26 @@ const ProductCard = ({
                     specialPrice,
                 })
             }}
-                    className="text-sm md:text-base font-medium mb-1 cursor-pointer text-black hover:underline underline-offset-4 decoration-1">
+                    className="text-xs md:text-[13px] font-medium mb-[2px] cursor-pointer text-gray-800 hover:text-black hover:underline underline-offset-4 decoration-1">
                     {truncateText(productName, 40)}
                 </h2>
                 
                 { !about && (
-                    <div className="flex flex-col items-center justify-center mt-2 w-full gap-3">
+                    <div className="flex flex-col items-start justify-center w-full">
                         {specialPrice ? (
                             <div className="flex items-center gap-3">
-                                <span className="text-gray-400 line-through text-sm">
+                                <span className="text-gray-400 line-through text-xs md:text-[13px]">
                                     ${Number(price).toFixed(2)}
                                 </span>
-                                <span className="text-base font-medium text-black">
+                                <span className="text-xs md:text-[13px] font-semibold text-black">
                                     ${Number(specialPrice).toFixed(2)}
                                 </span>
                             </div>
                         ) : (
-                            <span className="text-base font-medium text-black">
+                            <span className="text-xs md:text-[13px] font-semibold text-black">
                                 ${Number(price).toFixed(2)}
                             </span>
                         )}
-
-                        {/* Minimal Add to Cart Button */}
-                        <button
-                            disabled={!isAvailable || btnLoader}
-                            onClick={() => addToCartHandler({
-                                image,
-                                productName,
-                                description,
-                                specialPrice,
-                                price,
-                                productId,
-                                quantity,
-                            })}
-                            className={`mt-2 ${isAvailable ? "opacity-100 hover:bg-black hover:text-white" : "opacity-50 cursor-not-allowed"}
-                                border border-black text-black py-2 px-6 text-xs uppercase tracking-widest transition-colors duration-300 w-full max-w-[200px]`}>
-                            {isAvailable ? "Add to Cart" : "Out of Stock"}
-                        </button>
                     </div>
                 )}
             </div>
