@@ -1,6 +1,6 @@
 import { Badge } from "@mui/material";
 import { useState } from "react";
-import { FaShoppingCart, FaUser, FaRegHeart, FaSearch } from "react-icons/fa";
+import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
@@ -21,51 +21,68 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="bg-white z-50 sticky top-0 border-b border-gray-200">
+        <nav className="bg-white z-50 sticky top-0 border-b border-gray-100">
             <div className="w-full px-4 sm:px-8 md:px-12">
-                <div className="flex items-center justify-between h-20">
+                <div className="flex items-center justify-between h-20 md:h-24">
                     
-                    {/* Left - Menu & Search */}
-                    <div className="flex items-center gap-6 flex-1">
+                    {/* Left - Navigation Links */}
+                    <div className="hidden lg:flex items-center gap-8 flex-1">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                className={`text-xs md:text-sm font-semibold tracking-widest uppercase transition-colors hover:text-gray-500 ${
+                                    path === link.path
+                                        ? "text-black border-b-2 border-black pb-1"
+                                        : "text-black"
+                                }`}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
+
+                    {/* Mobile Menu Button - Left on mobile */}
+                    <div className="lg:hidden flex-1">
                         <button
                             onClick={() => setNavbarOpen(!navbarOpen)}
-                            className="text-black hover:text-gray-600 transition-colors flex items-center gap-2 font-medium text-sm tracking-wide"
+                            className="text-black hover:text-gray-600 transition-colors flex items-center gap-2 font-medium"
                         >
                             {navbarOpen ? (
-                                <RxCross2 className="text-xl" />
+                                <RxCross2 className="text-2xl" />
                             ) : (
-                                <IoIosMenu className="text-2xl" />
+                                <IoIosMenu className="text-3xl" />
                             )}
-                            <span className="hidden md:block">Menu</span>
-                        </button>
-                        
-                        <button className="hidden md:flex text-black hover:text-gray-600 transition-colors items-center gap-2 font-medium text-sm tracking-wide">
-                            <FaSearch className="text-lg" />
-                            <span>Search</span>
                         </button>
                     </div>
 
                     {/* Center - Logo */}
                     <div className="flex-1 flex justify-center">
                         <Link to="/" className="flex items-center">
-                            <span className="text-3xl font-serif font-semibold tracking-widest text-black">
+                            <span className="text-2xl md:text-4xl font-serif tracking-[0.25em] md:tracking-[0.3em] text-black uppercase font-medium">
                                 PARIDHAN
                             </span>
                         </Link>
                     </div>
 
-                    {/* Right Side - Call Us, Wishlist, Cart & Auth */}
-                    <div className="flex items-center justify-end gap-6 flex-1">
-                        <span className="hidden lg:block text-sm font-medium tracking-wide">Call Us</span>
-                        
-                        <button className="hidden md:block text-black hover:text-gray-600 transition-colors">
-                            <FaRegHeart className="text-xl" />
-                        </button>
+                    {/* Right Side - Profile & Cart */}
+                    <div className="flex items-center justify-end gap-6 md:gap-8 flex-1">
+                        {/* Login / User Menu */}
+                        {user && user.id ? (
+                            <UserMenu />
+                        ) : (
+                            <Link
+                                to="/login"
+                                className="text-black hover:text-gray-500 transition-colors"
+                            >
+                                <FaUser className="text-xl md:text-2xl font-light" />
+                            </Link>
+                        )}
 
                         {/* Cart */}
                         <Link
                             to="/cart"
-                            className="text-black hover:text-gray-600 transition-colors relative"
+                            className="text-black hover:text-gray-500 transition-colors relative flex items-center gap-2"
                         >
                             <Badge
                                 showZero
@@ -74,43 +91,32 @@ const Navbar = () => {
                                     '& .MuiBadge-badge': {
                                         backgroundColor: '#000',
                                         color: '#fff',
-                                        fontSize: '0.7rem',
-                                        minWidth: '18px',
-                                        height: '18px',
+                                        fontSize: '0.65rem',
+                                        minWidth: '16px',
+                                        height: '16px',
+                                        fontWeight: 'bold',
                                     }
                                 }}
                             >
-                                <FaShoppingCart className="text-xl" />
+                                <FaShoppingCart className="text-xl md:text-2xl" />
                             </Badge>
                         </Link>
-
-                        {/* Login / User Menu */}
-                        {user && user.id ? (
-                            <UserMenu />
-                        ) : (
-                            <Link
-                                to="/login"
-                                className="text-black hover:text-gray-600 transition-colors"
-                            >
-                                <FaUser className="text-xl" />
-                            </Link>
-                        )}
                     </div>
                 </div>
 
-                {/* Mobile/Desktop Dropdown Menu */}
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                {/* Mobile Dropdown Menu */}
+                <div className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
                     navbarOpen ? "max-h-96 border-t border-gray-100" : "max-h-0"
                 }`}>
-                    <div className="flex flex-col gap-4 py-6 px-2">
+                    <div className="flex flex-col gap-6 py-8 px-4">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.path}
                                 to={link.path}
                                 onClick={() => setNavbarOpen(false)}
-                                className={`text-sm font-medium tracking-wide uppercase transition-colors ${
+                                className={`text-sm font-semibold tracking-widest uppercase transition-colors ${
                                     path === link.path
-                                        ? "text-black underline underline-offset-4"
+                                        ? "text-black underline underline-offset-8"
                                         : "text-gray-500 hover:text-black"
                                 }`}
                             >

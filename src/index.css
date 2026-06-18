@@ -1,13 +1,10 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap');
 
-@layer base;
-
-@import 'tailwindcss';
-
 @theme {
-  --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Playfair Display', serif;
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
 }
 
 @layer base {
@@ -19,7 +16,6 @@
     border-color: var(--color-gray-200, currentcolor);
   }
   
-  /* Light Minimalist Theme Base Styles */
   body {
     background-color: #ffffff;
     color: #000000;
@@ -29,20 +25,16 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
-  
   ::-webkit-scrollbar-track {
     background: #f1f1f1;
   }
-  
   ::-webkit-scrollbar-thumb {
     background: #d1d5db;
   }
-  
   ::-webkit-scrollbar-thumb:hover {
     background: #9ca3af;
   }
@@ -54,26 +46,22 @@
     letter-spacing: -0.02em;
     font-weight: 400;
   }
-  
   .luxury-button {
     background-color: #000000;
     color: #ffffff;
     border: 1px solid #000000;
     transition: all 0.3s ease;
   }
-  
   .luxury-button:hover {
     background-color: #ffffff;
     color: #000000;
   }
-
   .luxury-button-outline {
     background-color: transparent;
     color: #000000;
     border: 1px solid #000000;
     transition: all 0.3s ease;
   }
-  
   .luxury-button-outline:hover {
     background-color: #000000;
     color: #ffffff;
@@ -86,90 +74,71 @@
   color: #000000 !important;
   border-radius: 0 !important;
 }
-
 .MuiOutlinedInput-notchedOutline {
   border-color: #e5e7eb !important;
   border-radius: 0 !important;
 }
-
 .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
   border-color: #000000 !important;
 }
-
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: #000000 !important;
   border-width: 1px !important;
 }
-
 .MuiInputLabel-root {
   color: #6b7280 !important;
 }
-
 .MuiInputLabel-root.Mui-focused {
   color: #000000 !important;
 }
-
 .MuiSelect-select {
   background-color: #ffffff !important;
   color: #000000 !important;
 }
-
 .MuiMenu-paper {
   background-color: #ffffff !important;
   color: #000000 !important;
   border-radius: 0 !important;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
 }
-
 .MuiMenuItem-root {
   color: #000000 !important;
 }
-
 .MuiMenuItem-root:hover {
   background-color: #f3f4f6 !important;
 }
-
 .MuiStepLabel-label {
   color: #6b7280 !important;
 }
-
 .MuiStepLabel-label.Mui-active {
   color: #000000 !important;
 }
-
 .MuiStepLabel-label.Mui-completed {
   color: #6b7280 !important;
 }
-
 .MuiStepIcon-root {
   color: #e5e7eb !important;
 }
-
 .MuiStepIcon-root.Mui-active {
   color: #000000 !important;
 }
-
 .MuiStepIcon-root.Mui-completed {
   color: #000000 !important;
 }
-
 .MuiDialog-paper {
   background-color: #ffffff !important;
   color: #000000 !important;
   border-radius: 0 !important;
 }
-
 .MuiTableCell-root {
   border-bottom-color: #e5e7eb !important;
   color: #000000 !important;
 }
-
 .MuiTableHead .MuiTableCell-root {
   background-color: #f9fafb !important;
   color: #4b5563 !important;
   font-weight: 600 !important;
 }
-
 .MuiChip-root {
   background-color: #f3f4f6 !important;
   color: #000000 !important;
